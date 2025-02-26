@@ -2,7 +2,6 @@ param(
     [switch]$cleanInstall = $false
 )
 
-# Function to log messages with timestamp
 function Write-Log {
     param($Message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -14,25 +13,7 @@ if ($cleanInstall) {
     & "$PSScriptRoot\uninstall_nvm.ps1"
 }
 
-$minimumNodeVersion = "18.18.0"
 $desiredNodeVersion = "22.14.0"
-
-$nodeNotInstalled = $false
-$nodeTooOld = $false
-
-# first check if node is installed by checking which node
-$nodePath = Get-Command -Name node -ErrorAction SilentlyContinue
-if ($null -eq $nodePath) {
-    $nodeNotInstalled = $true
-} else {
-    $nodeVersion = node -v
-    $nodeVersion = $nodeVersion.Substring(1)
-    Write-Log "Node.js version $nodeVersion is installed, the minimum required version is $minimumNodeVersion."
-    if ($nodeVersion -lt $minimumNodeVersion) {
-        Write-Log "Node.js version $nodeVersion is less than the minimum required version $minimumNodeVersion."
-        $nodeTooOld = $true
-    }
-}
 
 $nvmPath = Get-Command -Name nvm -ErrorAction SilentlyContinue
 if ($null -eq $nvmPath) {
@@ -88,20 +69,7 @@ arch: 64
         
         # Verify installation
         $nvmVersion = nvm version
-        if ($LASTEXITCODE -eq 0) {
-            Write-Log "NVM installed successfully. Version: $nvmVersion"
-        } else {
-            throw "NVM installation verification failed"
-        }
-        
-    } catch {
-        Write-Log "Error: $($_.Exception.Message)"
-        exit 1
-    }
-}
 
-if ($nodeTooOld -or $nodeNotInstalled -or $nvmNotInstalled) {
-    try {
         # Install and use node
         Write-Log "Installing Node.js $desiredNodeVersion version..."
         Write-Log "NVM install directory: $env:NVM_HOME"
@@ -125,6 +93,12 @@ if ($nodeTooOld -or $nodeNotInstalled -or $nvmNotInstalled) {
         # Verify Node.js installation
         $nodeVersion = node -v
         Write-Log "Node.js version $nodeVersion installed successfully"
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-Log "NVM installed successfully. Version: $nvmVersion"
+        } else {
+            throw "NVM installation verification failed"
+        }
         
     } catch {
         Write-Log "Error: $($_.Exception.Message)"
