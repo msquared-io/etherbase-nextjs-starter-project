@@ -141,25 +141,19 @@ if ($nodeTooOld -or $nodeNotInstalled) {
     }
 }
 
-# Check if Next.js is installed
-Write-Log "Checking if Next.js is installed..."
-$foundNext = npm list | grep next\@
-if ($null -ne $foundNext) {
-    Write-Log "Next.js is already installed."
-} else {
-    # Install Next.js with error handling
-    Write-Log "Installing Next.js..."
-    try {
-        npm install next
-        if ($LASTEXITCODE -ne 0) {
-            throw "Next.js installation failed"
-        }
-        Write-Log "Next.js installed succesnsfully"
-    } catch {
-        Write-Log "Error installing Next.js: $($_.Exception.Message)"
-        exit 1
+# Install Next.js with error handling
+Write-Log "Installing Next.js..."
+try {
+    npm install next
+    if ($LASTEXITCODE -ne 0) {
+        throw "Next.js installation failed"
     }
+    Write-Log "Next.js installed succesnsfully"
+} catch {
+    Write-Log "Error installing Next.js: $($_.Exception.Message)"
+    exit 1
 }
+
 
 # Start the development server
 Write-Log "Starting development server..."
