@@ -48,8 +48,7 @@ if ! npm list next &> /dev/null; then
     npm install next
 fi
 
-npm install
-if [ $? -ne 0 ]; then
+if ! npm install; then
     log_message "Error: Failed to install project dependencies"
     exit 1
 fi
