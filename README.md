@@ -2,6 +2,50 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Windows
+If you already have Node.js installed and next.js installed, you can
+skip the following steps.
+
+#### Install option 1 (via UI)
+Navigate to the `start_server/windows` directory and right click on
+`run_server.bat` and select `Run as administrator`.
+
+You will only need to run as administrator if you are running this for the
+first time.
+
+#### Install option 1 (via CLI)
+Open a command prompt or powershell window with admin privileges, navigate
+to the root directory of the project and run the following command:
+
+```bash
+.\start_server\windows\run_server.bat
+```
+
+You will only need to run as administrator if you are running this for the
+first time.
+
+#### Run server
+
+See either the UI or CLI instructions above.
+
+### Linux / MacOS
+
+If you already have Node.js installed and next.js installed, you can
+skip the install steps.
+
+#### Install
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
+
+Make sure you have next.js installed:
+
+```bash
+npm install next
+```
+#### Run server
+
 First, run the development server:
 
 ```bash
