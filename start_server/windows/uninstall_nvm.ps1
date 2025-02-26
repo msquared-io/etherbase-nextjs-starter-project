@@ -21,11 +21,11 @@ function Uninstall-NVM {
         $nvmSymlink = [System.Environment]::GetEnvironmentVariable("NVM_SYMLINK", [System.EnvironmentVariableTarget]::Machine)
         
         # Remove directories
-        if (Test-Path $nvmHome) {
+        if ($null -ne $nvmHome -and (Test-Path $nvmHome)) {
             Write-Log "Removing NVM installation directory..."
             Remove-Item -Path $nvmHome -Recurse -Force
         }
-        if (Test-Path $nvmSymlink) {
+        if ($null -ne $nvmHome -and (Test-Path $nvmSymlink)) {
             Write-Log "Removing Node.js symlink directory..."
             Remove-Item -Path $nvmSymlink -Recurse -Force
         }
@@ -43,6 +43,14 @@ function Uninstall-NVM {
         [System.Environment]::SetEnvironmentVariable("Path", $newPath, [System.EnvironmentVariableTarget]::Machine)
         
         Write-Log "NVM has been successfully uninstalled"
+
+        # Uninstall Node.js
+        Write-Log "Uninstalling Node.js..."
+        $nodePath = [System.Environment]::GetEnvironmentVariable("NODE_PATH", [System.EnvironmentVariableTarget]::Machine)
+        if ($null -ne $nodePath -and (Test-Path $nodePath)) {
+            Write-Log "Removing Node.js installation directory..."
+            Remove-Item -Path $nodePath -Recurse -Force
+        }
     } catch {
         Write-Log "Error during uninstall: $($_.Exception.Message)"
     }
