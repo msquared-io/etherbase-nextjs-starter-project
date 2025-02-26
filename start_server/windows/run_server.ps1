@@ -60,12 +60,6 @@ arch: 64
         
         # Verify installation
         $nvmVersion = nvm version
-
-        # Install and use node
-        Write-Log "Installing Node.js $desiredNodeVersion version..."
-        Write-Log "NVM install directory: $env:NVM_HOME"
-        Write-Log "NVM symlink directory: $env:NVM_SYMLINK"
-        
         
         # Install and use Node.js
         Write-Log "Installing Node.js..."
