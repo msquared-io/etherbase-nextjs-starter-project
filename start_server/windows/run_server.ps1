@@ -19,7 +19,6 @@ $desiredNodeVersion = "22.14.0"
 
 $nodeNotInstalled = $false
 $nodeTooOld = $false
-$nvmNotInstalled = $false
 
 # first check if node is installed by checking which node
 $nodePath = Get-Command -Name node -ErrorAction SilentlyContinue
@@ -35,16 +34,8 @@ if ($null -eq $nodePath) {
     }
 }
 
-if ($nodeTooOld -or $nodeNotInstalled) {
-    # Check if nvm is installed
-    $nvmPath = Get-Command -Name nvm -ErrorAction SilentlyContinue
-    if ($null -eq $nvmPath) {
-        Write-Log "NVM is not installed."
-        $nvmNotInstalled = $true
-    }
-}
-
-if ($nvmNotInstalled) {
+$nvmPath = Get-Command -Name nvm -ErrorAction SilentlyContinue
+if ($null -eq $nvmPath) {
     if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Log "Error: This script needs to be run as Administrator. Please restart with elevated privileges."
         exit 1
@@ -109,7 +100,7 @@ arch: 64
     }
 }
 
-if ($nodeTooOld -or $nodeNotInstalled) {
+if ($nodeTooOld -or $nodeNotInstalled -or $nvmNotInstalled) {
     try {
         # Install and use node
         Write-Log "Installing Node.js $desiredNodeVersion version..."
