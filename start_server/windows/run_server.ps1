@@ -1,16 +1,7 @@
-param(
-    [switch]$cleanInstall = $false
-)
-
 function Write-Log {
     param($Message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     Write-Host "[$timestamp] $Message"
-}
-
-# if clean install, call uninstall_nvm.ps1
-if ($cleanInstall) {
-    & "$PSScriptRoot\uninstall_nvm.ps1"
 }
 
 $desiredNodeVersion = "22.14.0"
