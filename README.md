@@ -3,17 +3,20 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 ### Windows
+
 If you already have Node.js installed and next.js installed, you can
 skip the following steps.
 
-#### Install option 1 (via UI)
+#### Install option 1 via script (using file explorer)
+
 Navigate to the `start_server/windows` directory and right click on
 `run_server.bat` and select `Run as administrator`.
 
 You will only need to run as administrator if you are running this for the
 first time.
 
-#### Install option 1 (via CLI)
+#### Install option 2 via script (using cmd / terminal)
+
 Open a command prompt or powershell window with admin privileges, navigate
 to the root directory of the project and run the following command:
 
@@ -26,14 +29,23 @@ first time.
 
 #### Run server
 
-See either the UI or CLI instructions above.
+See either option 1 or option 2 instructions above.
 
 ### Linux / MacOS
 
 If you already have Node.js installed and next.js installed, you can
 skip the install steps.
 
-#### Install
+#### Install option 1 via script
+
+Open a terminal and navigate to the root directory of the project and run the
+following command:
+
+```bash
+.\start_server\mac_or_linux\run_server.sh
+```
+
+#### Install option 2 manual Install
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
@@ -58,7 +70,17 @@ pnpm dev
 bun dev
 ```
 
+Or run the server with the script:
+
+```bash
+.\start_server\mac_or_linux\run_server.sh
+```
+
+### Use the app (once the server is running)
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+#### Iterate on the app
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
