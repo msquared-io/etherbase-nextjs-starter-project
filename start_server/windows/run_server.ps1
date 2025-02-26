@@ -142,6 +142,7 @@ if ($nodeTooOld -or $nodeNotInstalled) {
 }
 
 # Check if Next.js is installed
+Write-Log "Checking if Next.js is installed..."
 $foundNext = npm list | grep next\@
 if ($null -ne $foundNext) {
     Write-Log "Next.js is already installed."
