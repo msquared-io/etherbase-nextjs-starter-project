@@ -165,6 +165,7 @@ if ($null -ne $foundNext) {
 Write-Log "Starting development server..."
 try {
     $projectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+    Write-Log "Starting development server at $projectRoot"
     npm -C $projectRoot run dev
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to start development server"
