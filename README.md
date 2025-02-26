@@ -45,7 +45,7 @@ following command:
 .\start_server\mac_or_linux\run_server.sh
 ```
 
-#### Install option 2 manual Install
+#### Install option 2 manual
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
