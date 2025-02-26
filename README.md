@@ -49,12 +49,14 @@ following command:
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+nvm install 22.14.0
+nvm use 22.14.0
 ```
 
-Make sure you have next.js installed:
+Navigate to the root directory of the project and run the following command:
 
 ```bash
-npm install next
+npm install
 ```
 #### Run server
 

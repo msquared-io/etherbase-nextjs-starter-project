@@ -42,12 +42,6 @@ log_message "Node.js $(node -v) installed successfully"
 log_message "Installing project dependencies..."
 cd "$(dirname "$(dirname "$(dirname "$0")")")" || exit 1
 
-# Install Next.js if not already installed
-if ! npm list next &> /dev/null; then
-    log_message "Installing Next.js..."
-    npm install next
-fi
-
 if ! npm install; then
     log_message "Error: Failed to install project dependencies"
     exit 1
