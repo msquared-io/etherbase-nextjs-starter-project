@@ -132,30 +132,35 @@ if ($nodeTooOld -or $nodeNotInstalled -or $nvmNotInstalled) {
     }
 }
 
-# Install Next.js with error handling
-Write-Log "Installing Next.js..."
+Write-Log "Installing dependencies..."
 try {
-    npm install next
+    $projectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+    Set-Location -Path $projectRoot
+    
+    Write-Log "Installing project dependencies..."
+    npm install
     if ($LASTEXITCODE -ne 0) {
-        throw "Next.js installation failed"
+        throw "Failed to install project dependencies"
     }
-    Write-Log "Next.js installed succesnsfully"
+    Write-Log "Project dependencies installed successfully"
 } catch {
-    Write-Log "Error installing Next.js: $($_.Exception.Message)"
+    Write-Log "Error installing dependencies: $($_.Exception.Message)"
     exit 1
+} finally {
+    Pop-Location
 }
-
 
 # Start the development server
 Write-Log "Starting development server..."
 try {
-    $projectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
     Write-Log "Starting development server at $projectRoot"
-    npm -C $projectRoot run dev
+    npm run dev
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to start development server"
     }
 } catch {
     Write-Log "Error starting development server: $($_.Exception.Message)"
     exit 1
+} finally {
+    Pop-Location
 }
